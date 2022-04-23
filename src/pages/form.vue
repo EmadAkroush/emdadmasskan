@@ -1,6 +1,10 @@
-<script lang="ts" setup >import { dataToEsm } from "@rollup/pluginutils";
+<script lang="ts" setup >
+
 import { ref , reactive } from "@vue/composition-api"
-  
+import {  useCounterStores } from "../stores";  
+import { storeToRefs } from "pinia";
+let store = useCounterStores();
+
   var form = reactive({
     title: '',
     select: '',
@@ -13,8 +17,11 @@ import { ref , reactive } from "@vue/composition-api"
     dataCreateadd.push(form)
     
   }
+ 
+  
 </script>
 <template>
+ 
   <v-div class="ma-md-16 ma-5">
     <v-sheet color="white" elevation="3" height="auto" outlined rounded shaped width="100%">
       <v-form class="pa-4 px-md-14">
@@ -24,10 +31,11 @@ import { ref , reactive } from "@vue/composition-api"
               data-vv-name="select"></v-select>
                
           </v-col>
+          
           <v-col md="6" sm="12" cols="12">
             
             <v-file-input v-model="form.pichers" truncate-length="19"  label="تصویر اگهی را بارگزاری فرمایید "></v-file-input>
-           <v-p>Message is: {{   }}</v-p>
+           <v-p>Message is: {{ store.counter  }}</v-p>
           </v-col>
         </v-row>
         <v-col md="12" xs="12" sm="12" cols="12">
@@ -47,7 +55,7 @@ import { ref , reactive } from "@vue/composition-api"
           <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark @click="submit" width="150px">ارسال </v-btn>
         </v-row>
 
-
+     
       </v-form>
     </v-sheet>
   </v-div>

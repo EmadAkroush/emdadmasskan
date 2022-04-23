@@ -8,6 +8,7 @@ import VueRouter from 'vue-router'
 import Routes from '../src/router/index'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
+
 /* import specific icons */
 import { faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
@@ -49,7 +50,7 @@ const app = createApp({
 })
 
 app.use(PiniaVuePlugin)
-
+app.use(createPinia)
 app.mount('#app')
 function createWebHistory() {
   throw new Error('Function not implemented.')
