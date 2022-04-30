@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue-demi';
 import signinpopup from '../views/signinpopup.vue';
+import signinpopupsms from '../views/signinpopupsms.vue';
+
   var drawer=ref(false);
 
 </script>
@@ -20,7 +22,7 @@ import signinpopup from '../views/signinpopup.vue';
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>  ثبت نام ورود </v-list-item-title>
+          <v-list-item-title >  ثبت نام ورود </v-list-item-title>
           
         </v-list-item-content>
 
@@ -117,7 +119,7 @@ import signinpopup from '../views/signinpopup.vue';
       <v-spacer></v-spacer>
 
        <signinpopup></signinpopup>
-
+       <signinpopupsms></signinpopupsms>
         <v-icon>mdi-magnify</v-icon>
 
    
