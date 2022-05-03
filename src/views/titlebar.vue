@@ -75,8 +75,10 @@ import signinpopupsms from '../views/signinpopupsms.vue';
           <v-list-item-title>  درباره ما  </v-list-item-title>
           
         </v-list-item-content>
+        
       </v-list-item>
        
+      <v-divider inset></v-divider>
          <v-list-item>
         <v-list-item-icon>
     
@@ -98,7 +100,27 @@ import signinpopupsms from '../views/signinpopupsms.vue';
         </v-list-item-content>
       </v-list-item>
 
+      <v-divider inset></v-divider>
+            <v-list-item>
+        <v-list-item-icon>
+    
+            <font-awesome-icon icon="fa-solid fa-circle-info" />
+       
 
+        </v-list-item-icon>
+
+        <v-list-item-content>
+         
+          <router-link class="link" to="/form">
+               <v-list-item-title>   ثبت اگهی   </v-list-item-title>
+             </router-link>
+
+
+
+        
+          
+        </v-list-item-content>
+      </v-list-item>
 
 
     </v-list>

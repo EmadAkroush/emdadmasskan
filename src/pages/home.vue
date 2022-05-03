@@ -7,6 +7,7 @@ import {  useCounterStores } from "../stores";
 import { storeToRefs } from "pinia";
 
 let store = useCounterStores();
+console.log(store.userdata)
 let ler = store.formnout
 </script>
 <template>

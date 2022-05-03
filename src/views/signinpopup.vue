@@ -1,45 +1,36 @@
 <script lang="ts" setup>
- import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
-  import { extend, ValidationObserver,  setInteractionMode } from 'vee-validate'
-  import {ValidationProvider} from 'vee-validate'
-  import {ref} from '@vue/composition-api';
+
+  import {ref , reactive} from '@vue/composition-api';
   import axios from 'axios';
-  setInteractionMode('eager')
-  extend('digits', {
-    ...digits,
-    message: '{_field_} needs to be {length} digits. ({_value_})',
-  })
+  import {  useCounterStores } from "../stores";
+  let store = useCounterStores();
+ var valid = ref(true);
 
-  extend('required', {
-    ...required,
-    message: '{_field_} نمی تواند خالی باشد ',
-  })
+var nameRules = reactive([
+ v => !!v || 'وارد کردن شماره موبایل اجباری است',
+ v => (v && v.length == 11) || 'شماره موبایل باید یازده رقم باشد ',
+]
+)
 
-  extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters',
-  })
+ 
 
-  extend('regex', {
-    ...regex,
-    message: '{_field_} {_value_} does not match {regex}',
-  })
 
-  extend('email', {
-    ...email,
-    message: 'Email must be valid',
-  })
+
+
   var dialog = ref(false)
   var mobileNumber= ref('')
   function submit(){
-    
+   store.dialogsms = true
    dialog.value = false
      axios.post('https://emserver.iran.liara.run/App/Auth/ValidationNumber', {
-       "User_Phone_Number": "09331460389"
+       "User_Phone_Number": mobileNumber.value
      }
      ).then(function (response) {
-       
-      console.log(response.data)
+         store.userdata = response.data;
+      //  loading.value = false;
+    // console.log(store.userdata.Data.ID);
+   
+
   })
   .catch(function (error) {
     // handle error
@@ -50,9 +41,10 @@
   });
   
 }
+
 </script>
 <template>
-  <v-div class="text-center">
+  <div class="text-center">
     <v-dialog v-model="dialog" width="500" >
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark dense v-bind="attrs" v-on="on" active>
@@ -64,59 +56,42 @@
       </template>
 
      
-      <validation-observer
-    ref="observer"
-    v-slot="{ invalid }"
-  >
-   <v-card height="200px" class="d-flex flex-column justify-center" >
-    <form @submit.prevent="submit"
-            ref="form" 
-            
-            lazy-validation
-            class="px-6 login-form align-center  "
-            width="100%"
-    >
-      
-     
-      <validation-provider
-        v-slot="{ errors }"
-          name="شماره تلفن "
-          :rules="{
-          required: true,
-          digits: 11,
-          regex: '^(09)\\d{9}$'
-        }"
-      >
-        <v-text-field
-          v-model="phoneNumber"
-          :counter="11"
-          :error-messages="errors"
-          label="شماره تلفن همراه"
-          required
-        ></v-text-field>
-        
-      </validation-provider>
-    
-  
- 
 
-      <v-btn
+   <v-card height="200px" class="d-flex flex-column justify-center" >
+       <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+       class="px-6 login-form align-center  "
+            width="100%"
+  >
+    <v-text-field
+      v-model="mobileNumber"
+      :counter="11"
+      :rules="nameRules"
+      label="شماره تلفن"
+      required
+    ></v-text-field>
+
+    
+
+    <v-btn
+        :disabled="!valid"
         color=" primary  "
         class="mt-14  mr-auto d-flex "
         id="custom-disabled"
-        type="submit"
-        :disabled="invalid"
-      >
-       ثبت نام ورود 
-      </v-btn>
-   
-    
-    </form>
- </v-card>
-  </validation-observer>
+        @click="submit()"
+    >
+      ورود ثبت نام 
+    </v-btn>
+
+  
+  </v-form>
+    </v-card>
+  
     </v-dialog>
     
-  </v-div>
+  </div>
 </template>
 <style>
 #custom-disabled.v-btn--disabled {

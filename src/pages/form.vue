@@ -19,27 +19,46 @@ let store = useCounterStores();
     text: ''
   })
    var items = ['خدمات زیبایی ', 'کاربردی ', 'گرمایشی ', 'تعمیرات ', 'اسباب کشی و جابجایی ', 'خدمات نظافت و شستوشو ', 'لوازم منزل ']
-  function submit(){
-    
-
-    
+function createpost() {
+  let a = form.pichers
+  console.log("a", a);
+  const reader = new FileReader()
+  let rerere = []
+  let rawImg;
+  var imgstr;
+  reader.onloadend = () => {
+    rawImg = reader.result;
+    imgstr = rawImg
+    let dsd = rawImg.split(",");
+    rerere.push(dsd[1]);
+    console.log("dsd", dsd);
   }
-  function createpost(){
-     axios.post('https://emserver.iran.liara.run/App/Ad', form.pichers
-     ).then(function (response) {
-       
-      console.log(response.data)
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
-  console.log(form.pichers)
+
+  reader.readAsDataURL(a[0]);
+
+  let agahi = {
+    Image: rerere,
+    Description: form.text,
+    Category: form.select,
+    Title: form.title,
+    UserID: store.logindata.Data.User_Id
+  }
+
+  axios.post('https://emserver.iran.liara.run/App/Ad', agahi
+  )
+    .then(function (response) {
+      console.log("agahi", agahi);
+      console.log("response.data", response.data)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
   
-   }
+}
  
 </script>
 <template>

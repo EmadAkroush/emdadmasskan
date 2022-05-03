@@ -3,10 +3,11 @@ import { defineStore } from 'pinia'
 export const useCounterStores = defineStore({
   id: 'counter',
   state: () => ({
-    counter: 2,
+    counter: 0,
     formnout: [],
-    dialog: false
-    
+    dialogsms: false,
+    userdata : {},
+    logindata :{}
   }),
   getters: {
     doubleCount: (state) => state.counter * 2
