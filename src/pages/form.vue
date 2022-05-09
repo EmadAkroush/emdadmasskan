@@ -23,28 +23,24 @@ function createpost() {
   let a = form.pichers
   console.log("a", a);
   const reader = new FileReader()
-  let rerere = []
+  let convertimg = []
   let rawImg;
   var imgstr;
   reader.onloadend = () => {
     rawImg = reader.result;
     imgstr = rawImg
     let dsd = rawImg.split(",");
-    rerere.push(dsd[1]);
+    convertimg.push(dsd[1]);
+    // let convertvar = convertimg[0];
     console.log("dsd", dsd);
-  }
-
-  reader.readAsDataURL(a[0]);
-
-  let agahi = {
-    Image: rerere,
+     let agahi = {
+    Image: dsd[1],
     Description: form.text,
     Category: form.select,
     Title: form.title,
     UserID: store.logindata.Data.User_Id
   }
-
-  axios.post('https://emserver.iran.liara.run/App/Ad', agahi
+    axios.post('https://emserver.iran.liara.run/App/Ad', agahi
   )
     .then(function (response) {
       console.log("agahi", agahi);
@@ -57,6 +53,14 @@ function createpost() {
     .then(function () {
       // always executed
     });
+
+  }
+
+  reader.readAsDataURL(a[0]);
+  
+ 
+
+
   
 }
  

@@ -82,7 +82,7 @@ import signinpopupsms from '../views/signinpopupsms.vue';
          <v-list-item>
         <v-list-item-icon>
     
-            <font-awesome-icon icon="fa-solid fa-circle-info" />
+            <v-icon>mdi-folder-plus</v-icon>
        
 
         </v-list-item-icon>
@@ -104,16 +104,42 @@ import signinpopupsms from '../views/signinpopupsms.vue';
             <v-list-item>
         <v-list-item-icon>
     
-            <font-awesome-icon icon="fa-solid fa-circle-info" />
+            <v-icon>mdi-account-multiple</v-icon>
        
 
         </v-list-item-icon>
 
         <v-list-item-content>
          
-          <router-link class="link" to="/form">
-               <v-list-item-title>   ثبت اگهی   </v-list-item-title>
-             </router-link>
+          <router-link class="link" to="/listuser">
+
+               <v-list-item-title>   لیست کاربران   </v-list-item-title>
+               
+           </router-link>
+
+
+
+        
+          
+        </v-list-item-content>
+      </v-list-item>
+
+         <v-divider inset></v-divider>
+            <v-list-item>
+        <v-list-item-icon>
+    
+            <v-icon>mdi-advertisements</v-icon>
+       
+
+        </v-list-item-icon>
+
+        <v-list-item-content>
+         
+          <router-link class="link" to="/listad">
+
+               <v-list-item-title>   لیست اگهی ها   </v-list-item-title>
+               
+           </router-link>
 
 
 
