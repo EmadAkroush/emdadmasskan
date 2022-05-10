@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import axios from 'axios';
 import {ref , reactive} from '@vue/composition-api';
+import {  useCounterStores } from "../stores";  
+
+let store = useCounterStores();
+
+
 let listuser = ref()
 function getPosts(){
 // Make a request for a user with a given ID

@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+    import  useRouter    from "vue-router";
+    import  useRoute    from "vue-router";
     import axios from 'axios';
-    import {
-        ref,
-        reactive
-    } from '@vue/composition-api';
+    import {  useCounterStores } from "../stores";  
+    import {ref,reactive} from '@vue/composition-api';
+    
+    let store = useCounterStores();
     let listad = ref()
-
+                                   
     function getad() {
         // Make a request for a user with a given ID
 
@@ -13,6 +15,7 @@
             .then(function (response) {
                 // handle success
                 // posts.value = response.data;
+                store.adId = response.data;
                 listad.value = response.data;
                 console.log(listad.value)
             })
@@ -25,17 +28,21 @@
             });
 
     }
-    let deleteId = ref()
     getad()
+    let deleteId = ref()
+    
+    
     function deleteAd(i:number){
-     deleteId.value = listad.value[i]._id 
+    
+     deleteId.value = listad.value[i]._id;
+     store.adId = listad.value[i]._id;
      console.log(listad.value[i]._id);
-      axios.delete(`https://emserver.iran.liara.run/App/Ad/${listad.value}`)
+      axios.delete(`https://emserver.iran.liara.run/App/Ad/${deleteId.value}`)
             .then(function (response) {
                 // handle success
                 // posts.value = response.data;
-                listad.value = response.data;
-                console.log(listad.value)
+                
+                console.log(deleteId.value)
             })
             .catch(function (error) {
                 // handle error
@@ -46,6 +53,8 @@
             });
 
     }
+    
+
 </script>
 <template>
 
@@ -56,7 +65,7 @@
                 <v-list-item>
 
                     <v-list-item-content>
-                        <v-list-item-title>{{item.Title}}</v-list-item-title>
+                    <router-link class="link" to="/listadsingle">   <v-list-item-title >{{item.Title}}</v-list-item-title>  </router-link> 
                         <v-row>
                             <v-col>
                                 <v-list-item-subtitle>دسته بندی : {{item.Category}}</v-list-item-subtitle>

@@ -7,7 +7,8 @@ export const useCounterStores = defineStore({
     formnout: [],
     dialogsms: false,
     userdata : {},
-    logindata :{}
+    logindata :{},
+    adId : {}
   }),
   getters: {
     doubleCount: (state) => state.counter * 2
