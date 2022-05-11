@@ -15,7 +15,7 @@
             .then(function (response) {
                 // handle success
                 // posts.value = response.data;
-                store.adId = response.data;
+                
                 listad.value = response.data;
                 console.log(listad.value)
             })
@@ -33,10 +33,10 @@
     
     
     function deleteAd(i:number){
-    
-     deleteId.value = listad.value[i]._id;
+     
      store.adId = listad.value[i]._id;
-     console.log(listad.value[i]._id);
+     deleteId.value = listad.value[i]._id;
+     console.log(store.adId);
       axios.delete(`https://emserver.iran.liara.run/App/Ad/${deleteId.value}`)
             .then(function (response) {
                 // handle success

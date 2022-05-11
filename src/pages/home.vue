@@ -17,7 +17,7 @@ let ler = store.formnout
 
 </Header>
 <v-p>last form </v-p>
-  {{}}
+  
    <footerg></footerg>
    </div>
 </template>

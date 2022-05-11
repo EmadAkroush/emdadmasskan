@@ -3,16 +3,16 @@
   import {ref, reactive} from '@vue/composition-api';
 var valid = ref(true);
 
-var nameRules = reactive([
-v => !!v || 'Name is required',
- v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-]
-)
-var name = ref();
- function validate () {
+// var nameRules = reactive([
+// v => !!v || 'Name is required',
+//  v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+// ]
+// )
+// var name = ref();
+//  function validate () {
   
-  console.log('value is',name.value)
-     }
+//   console.log('value is',name.value)
+//      }
 
 
   // export default {

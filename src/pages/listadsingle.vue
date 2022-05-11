@@ -4,10 +4,12 @@ import {ref , reactive} from '@vue/composition-api';
 import {  useCounterStores } from "../stores";  
 
 let store = useCounterStores();
+let singleAd = ref()
+let adIdInside = ref(store.adId) 
      function getad() {
         // Make a request for a user with a given ID
-
-        axios.get('https://emserver.iran.liara.run/App/Ad')
+        console.log(store.adId)
+        axios.get(`https://emserver.iran.liara.run/App/Ad/${adIdInside.value}`)
             .then(function (response) {
                 // handle success
                 // posts.value = response.data;
@@ -27,7 +29,7 @@ let store = useCounterStores();
     getad()
 </script>
 <template>
-
+<div>ghgfhfh</div>
 </template>
 <style>
 
