@@ -39,7 +39,7 @@ getPosts()
     <v-list dense>
       <v-subheader>REPORTS</v-subheader>
       <v-list-item-group
-        v-model="selectedItem"
+       
         color="primary"
       >
 

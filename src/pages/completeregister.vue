@@ -36,7 +36,7 @@ let store = useCounterStores();
 </script>
 <template>
  
-  <div class="ma-md-16  ma-5">
+  <!-- <div class="ma-md-16  ma-5">
     <v-sheet color=" white" elevation="3" height="auto" outlined rounded shaped width="100%">
       <v-form class="pa-4 px-md-14">
         <v-row>
@@ -73,7 +73,7 @@ let store = useCounterStores();
      
       </v-form>
     </v-sheet>
-  </div>
+  </div> -->
 
 </template>
 <style>

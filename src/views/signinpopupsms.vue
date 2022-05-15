@@ -7,8 +7,8 @@
   var valid = ref(true);
 
 var nameRules = reactive([
- v => !!v || 'وارد کردن کد اهراز هویت  اجباری است',
- v => (v && v.length == 5) || ' کد اهراز هویت  ',
+ (v:any) => !!v || 'وارد کردن کد اهراز هویت  اجباری است',
+ (v:any) => (v && v.length == 5) || ' کد اهراز هویت  ',
 
 ]
 )
@@ -26,13 +26,14 @@ var nameRules = reactive([
      axios.post('https://emserver.iran.liara.run/App/Auth/SingUp', {
     "Code_ID": store.userdata.Data.ID,
     "User_Submit_Code": kodeNumber.value
-
+    
    }
      ).then(function (response) {
         //  store.userdata = response.data;
       //  loading.value = false;
+      console.log(store.userdata.Data.ID)
       store.logindata = response.data
-    console.log(store.logindata.Data.User_Id);
+   
     
 
   })

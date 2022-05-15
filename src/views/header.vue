@@ -8,7 +8,7 @@ import signinpopup from '../views/signinpopup.vue';
   lazy-src="https://picsum.photos/id/11/10/6"
   max-height="600px"
   max-width="100%"
-  src="../../src/assets/image/boost.jpg"
+  src="./img/boost.jpg"
 ></v-img>
 </template>
 <style>

@@ -34,7 +34,6 @@
     
     function deleteAd(i:number){
      
-     store.adId = listad.value[i]._id;
      deleteId.value = listad.value[i]._id;
      console.log(store.adId);
       axios.delete(`https://emserver.iran.liara.run/App/Ad/${deleteId.value}`)
@@ -54,7 +53,10 @@
 
     }
     
-
+function getID(i:number){
+      store.adId = listad.value[i]._id;
+      
+}
 </script>
 <template>
 
@@ -65,7 +67,7 @@
                 <v-list-item>
 
                     <v-list-item-content>
-                    <router-link class="link" to="/listadsingle">   <v-list-item-title >{{item.Title}}</v-list-item-title>  </router-link> 
+                    <router-link class="link" to="/listadsingle" >   <v-list-item-title  @click="getID(i)">{{item.Title}}</v-list-item-title>  </router-link> 
                         <v-row>
                             <v-col>
                                 <v-list-item-subtitle>دسته بندی : {{item.Category}}</v-list-item-subtitle>

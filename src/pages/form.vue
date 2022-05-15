@@ -18,23 +18,23 @@ let store = useCounterStores();
     pichers: '',
     text: ''
   })
-   var items = ['خدمات زیبایی ', 'کاربردی ', 'گرمایشی ', 'تعمیرات ', 'اسباب کشی و جابجایی ', 'خدمات نظافت و شستوشو ', 'لوازم منزل ']
+   var items = ['نظافت و شست و شو ', 'اسباب کشی بسته بندی', 'نصب و تعمیر لوازم منزل ', 'تعمیر و سرویس تجهیزات گرمایشی و سرمایشی ', ' نگهداری ساختمان', 'زیبایی', 'خودرو ']
 function createpost() {
-  let a = form.pichers
+  let a:any = form.pichers
   console.log("a", a);
   const reader = new FileReader()
   let convertimg = []
-  let rawImg;
-  var imgstr;
+  let rawImg:any;
+  var imgstr:any;
   reader.onloadend = () => {
     rawImg = reader.result;
     imgstr = rawImg
-    let dsd = rawImg.split(",");
-    convertimg.push(dsd[1]);
+    let imgsplit = rawImg.split(",");
+    convertimg.push(imgsplit[1]);
     // let convertvar = convertimg[0];
-    console.log("dsd", dsd);
+    console.log("dsd", imgsplit);
      let agahi = {
-    Image: dsd[1],
+    Image: imgsplit[1],
     Description: form.text,
     Category: form.select,
     Title: form.title,
@@ -84,8 +84,7 @@ function createpost() {
              
             
             <v-file-input multiple="buffer"  v-model="form.pichers " accept="image/*"  label="تصویر اگهی را بارگزاری فرمایید "></v-file-input>
-           <v-p>Message is: {{ store.counter  }}-{{ store.doubleCount }}</v-p>
-           <v-btn @click="store.increment"></v-btn>
+          
           
 
           </v-col>
@@ -96,7 +95,7 @@ function createpost() {
         </v-col>
         <v-row>
           <v-col>
-          <v-textarea counter label="متن آگهی را وارد فرمایید "  v-model="form.text" :rules="rules" :value="value" prepend-icon="mdi-calendar-text"></v-textarea>
+          <v-textarea counter label="متن آگهی را وارد فرمایید "  v-model="form.text"  prepend-icon="mdi-calendar-text"></v-textarea>
           
           </v-col>
         </v-row>
