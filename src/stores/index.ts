@@ -8,6 +8,7 @@ export const useCounterStores:any = defineStore({
   id: 'counter',
   state: () => ({
     counter: 0,
+    adData: {},
     formnout: [],
     dialogsms: false,
     userdata : {},

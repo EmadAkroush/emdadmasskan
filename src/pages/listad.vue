@@ -7,7 +7,7 @@
     
     let store = useCounterStores();
     let listad = ref()
-                                   
+                                 
     function getad() {
         // Make a request for a user with a given ID
 
@@ -17,6 +17,7 @@
                 // posts.value = response.data;
                 
                 listad.value = response.data;
+                
                 console.log(listad.value)
             })
             .catch(function (error) {

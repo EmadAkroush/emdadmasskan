@@ -3,12 +3,45 @@ import ourtor from '../views/ourtor.vue'
 import Header from '../views/header.vue';
 import Titlebar from '../views/titlebar.vue';
 import footerg from '../views/footerg.vue';
+import addata from '../views/addata.vue';
+import axios from 'axios';
 import {  useCounterStores } from "../stores";  
 import { storeToRefs } from "pinia";
+import {ref,reactive} from '@vue/composition-api';
 
 let store = useCounterStores();
-console.log(store.userdata)
+
 let ler = store.formnout
+
+let adData:any = ref()
+  function getad() {
+        // Make a request for a user with a given ID
+
+        axios.get('https://emserver.iran.liara.run/App/Ad')
+            .then(function (response) {
+                // handle success
+                // posts.value = response.data;
+                adData.value = response.data
+                
+                store.adData = response.data
+                console.log("mydata",response.data)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+
+    }
+    getad()
+
+
+
+
+
+
 </script>
 <template>
 <div>
@@ -16,10 +49,13 @@ let ler = store.formnout
 <Header>
 
 </Header>
-<v-p>last form </v-p>
-  
+    
+    <addata :adData="adData"></addata>
+   
    <footerg></footerg>
+   
    </div>
+
 </template>
 <style>
 

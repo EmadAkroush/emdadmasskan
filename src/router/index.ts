@@ -6,7 +6,7 @@ import { component } from 'vue/types/umd'
 import listuser from '../pages/listuser.vue'
 import listad from '../pages/listad.vue'
 import listadsingle from '../pages/listadsingle.vue'
-import listusersingle from ''
+
 export default[
     {path: '/', component: home},
     {path: '/form' , component: form},
