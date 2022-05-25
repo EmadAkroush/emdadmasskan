@@ -13,7 +13,16 @@ export const useCounterStores:any = defineStore({
     dialogsms: false,
     userdata : {},
     logindata :{},
-    adId : 0
+    adId : 0,
+    userId : 0,
+    adIdPublic : 0,
+    userlogin: false,
+    listUserShow: false,
+    listAdShow: false,
+    creatAdShow: false,
+    loginShow: true,
+    logoutShow: false,
+
   }),
   getters: {
     doubleCount: (state) => state.counter * 2
@@ -21,6 +30,7 @@ export const useCounterStores:any = defineStore({
   actions: {
     increment() {
       this.counter++
-    }
+    },
+   
   }
 })

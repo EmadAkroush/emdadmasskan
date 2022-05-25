@@ -47,9 +47,9 @@ var nameRules = reactive([
   <div class="text-center">
     <v-dialog v-model="dialog" width="500" >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark dense v-bind="attrs" v-on="on" active>
+        <v-btn color="primary" dark dense v-bind="attrs" v-on="on" active v-show="store.loginShow">
           ثبت نام ورود
-          <v-icon>mdi-exit-to-app</v-icon>
+          <v-icon>mdi-login</v-icon>
         </v-btn>
 
 

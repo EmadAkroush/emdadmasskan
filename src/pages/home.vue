@@ -1,3 +1,5 @@
+
+
 <script lang="ts" setup>
 import ourtor from '../views/ourtor.vue'
 import Header from '../views/header.vue';
@@ -9,9 +11,16 @@ import {  useCounterStores } from "../stores";
 import { storeToRefs } from "pinia";
 import {ref,reactive} from '@vue/composition-api';
 
+
+
+
 let store = useCounterStores();
 
 let ler = store.formnout
+
+
+
+
 
 let adData:any = ref()
   function getad() {
@@ -37,10 +46,10 @@ let adData:any = ref()
     }
     getad()
 
-
-
-
-
+function test(){
+   console.log("test-cash",store.logindata)
+}
+  
 
 </script>
 <template>

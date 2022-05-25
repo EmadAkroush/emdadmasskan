@@ -1,10 +1,37 @@
-<script lang="ts" setup>
+
+<script lang="ts">
+
+export default {
+  
+   beforeRouteEnter (to, from, next) {
+     let store = useCounterStores()
+      
+    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+     
+     next()
+   }else{
+     
+   }
+console.log(store.logindata.Meta.status)
+   }
+
+}
+
+</script>
+
+<script lang="ts"  setup >
 import axios from 'axios';
 import {ref , reactive} from '@vue/composition-api';
 import {  useCounterStores } from "../stores";  
+import  useRouter    from "vue-router";
+import  useRoute    from "vue-router";
+
+
+
+
 
 let store = useCounterStores();
-
+const route = new useRoute();
 
 let listuser = ref()
 function getPosts(){
@@ -15,7 +42,7 @@ axios.get('https://emserver.iran.liara.run/App/User/AllUser')
     // handle success
     // posts.value = response.data;
    listuser.value = response.data; 
-   console.log(listuser.value)
+   console.log("list-User",listuser.value)
   })
   .catch(function (error) {
     // handle error
@@ -27,7 +54,10 @@ axios.get('https://emserver.iran.liara.run/App/User/AllUser')
   
 }
 getPosts()
-
+function getIDUser(i:number){
+      store.userId = listuser.value[i]._id;
+      
+}
 
 </script>
 <template>
@@ -52,7 +82,9 @@ getPosts()
             <v-icon>mdi-account</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title >{{item.User_Name}}</v-list-item-title>
+             <router-link class="link" to="/listusersingle" > 
+            <v-list-item-title @click="getIDUser(i)">{{item.User_Name}}</v-list-item-title>
+             </router-link>
           </v-list-item-content>
 
         </v-list-item>

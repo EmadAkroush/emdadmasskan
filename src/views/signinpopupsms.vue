@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 
-  import {ref , reactive} from '@vue/composition-api';
+  import {ref , reactive , onBeforeMount , onBeforeUpdate} from '@vue/composition-api';
   import axios from 'axios';
+  import { json } from 'stream/consumers';
   import {  useCounterStores } from "../stores";
   let store = useCounterStores();
   var valid = ref(true);
@@ -20,6 +21,9 @@ var nameRules = reactive([
 
   var dialog = ref(false)
   var kodeNumber= ref('')
+  let tranceformdata = ref()
+  let loginStatus = ref()
+  let idata = ref()
   function submit(){
    store.dialogsms = false
    
@@ -29,12 +33,21 @@ var nameRules = reactive([
     
    }
      ).then(function (response) {
-        //  store.userdata = response.data;
-      //  loading.value = false;
-      console.log(store.userdata.Data.ID)
+     
+      store.listUserShow = true
+      store.listAdShow = true
+      store.creatAdShow = true
+      localStorage.setItem('listUserShow' , JSON.stringify(store.listUserShow))
+      localStorage.setItem('listAdShow' , JSON.stringify(store.listAdShow))
+      localStorage.setItem('creatAdShow' , JSON.stringify(store.creatAdShow))
+      localStorage.setItem('login', JSON.stringify(response.data))
+      
       store.logindata = response.data
-   
+      store.loginShow = false
+      location.reload();  
     
+  
+      
 
   })
   .catch(function (error) {
@@ -43,9 +56,24 @@ var nameRules = reactive([
   })
   .then(function () {
     // always executed
+    
   });
   
 }
+
+
+ onBeforeMount(()=>{
+       localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
+        if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+          
+        store.loginShow = JSON.parse(localStorage.getItem('loginShow'))
+        store.logoutShow = true
+        
+        }else{
+        
+           }
+
+     })
 
 </script>
 <template>

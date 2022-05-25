@@ -104,8 +104,8 @@ let my =ref();
            lazy-src="https://picsum.photos/id/11/10/6"
            max-height="250"
            max-width="100%"
-           :src=imgAd
-           ></v-img>
+           :src=imgAd>
+           </v-img>
           </v-col>
         
         </v-row>

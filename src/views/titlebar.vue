@@ -1,9 +1,23 @@
+
+
 <script setup lang="ts">
 import { ref } from 'vue-demi';
 import signinpopup from '../views/signinpopup.vue';
 import signinpopupsms from '../views/signinpopupsms.vue';
-
+import {  useCounterStores } from "../stores";
+import signout from '../views/signout.vue' 
+import { storeToRefs } from 'pinia';
+let store = useCounterStores();
   var drawer=ref(false);
+  let listUser = ref()
+ 
+   
+  store.listUserShow = JSON.parse(localStorage.getItem('listUserShow'));
+  store.listAdShow = JSON.parse(localStorage.getItem('listAdShow'));
+  store.creatAdShow = JSON.parse(localStorage.getItem('creatAdShow'));
+  listUser.value = store.listUserShow
+
+      console.log("store.logindata", store.logindata)
 
 </script>
 
@@ -24,6 +38,24 @@ import signinpopupsms from '../views/signinpopupsms.vue';
         <v-list-item-content>
           <v-list-item-title >  ثبت نام ورود </v-list-item-title>
           
+        </v-list-item-content>
+
+      </v-list-item>
+
+        <v-divider inset></v-divider>
+
+
+        <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-home
+          </v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <router-link class="link" to="/">
+          <v-list-item-title > صفحه اصلی </v-list-item-title>
+          </router-link>
         </v-list-item-content>
 
       </v-list-item>
@@ -79,7 +111,7 @@ import signinpopupsms from '../views/signinpopupsms.vue';
       </v-list-item>
        
       <v-divider inset></v-divider>
-         <v-list-item>
+         <v-list-item v-show="store.listUserShow">
         <v-list-item-icon>
     
             <v-icon>mdi-folder-plus</v-icon>
@@ -101,7 +133,7 @@ import signinpopupsms from '../views/signinpopupsms.vue';
       </v-list-item>
 
       <v-divider inset></v-divider>
-            <v-list-item>
+            <v-list-item v-show="store.listUserShow">
         <v-list-item-icon>
     
             <v-icon>mdi-account-multiple</v-icon>
@@ -113,7 +145,7 @@ import signinpopupsms from '../views/signinpopupsms.vue';
          
           <router-link class="link" to="/listuser">
 
-               <v-list-item-title>   لیست کاربران   </v-list-item-title>
+               <v-list-item-title >   لیست کاربران   </v-list-item-title>
                
            </router-link>
 
@@ -122,10 +154,11 @@ import signinpopupsms from '../views/signinpopupsms.vue';
         
           
         </v-list-item-content>
+        
       </v-list-item>
-
-         <v-divider inset></v-divider>
-            <v-list-item>
+<v-divider inset></v-divider>
+         
+            <v-list-item v-show="store.listAdShow">
         <v-list-item-icon>
     
             <v-icon>mdi-advertisements</v-icon>
@@ -165,7 +198,7 @@ import signinpopupsms from '../views/signinpopupsms.vue';
       <v-toolbar-title> امداد مسکن  </v-toolbar-title>
        
       <v-spacer></v-spacer>
-
+       <signout></signout>
        <signinpopup></signinpopup>
        <signinpopupsms></signinpopupsms>
         <v-icon>mdi-magnify</v-icon>

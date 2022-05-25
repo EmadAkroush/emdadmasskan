@@ -1,12 +1,32 @@
+
+<script lang="ts">
+
+export default {
+  
+   beforeRouteEnter (to, from, next) {
+     let store = useCounterStores()
+      
+    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+     
+     next()
+   }else{
+     
+   }
+console.log(store.logindata.Meta.status)
+   }
+}
+
+</script>
+
+
+
+
 <script lang="ts" setup >
 import Vue from 'vue';
 
 import { ref , reactive } from "@vue/composition-api";
 import {  useCounterStores } from "../stores";  
 import axios from 'axios';
-
-
-
 
 
 const post = ref({})
@@ -39,6 +59,7 @@ function createpost() {
     Category: form.select,
     Title: form.title,
     UserID: store.logindata.Data.User_Id
+    
   }
     axios.post('https://emserver.iran.liara.run/App/Ad', agahi
   )

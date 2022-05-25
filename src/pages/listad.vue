@@ -1,3 +1,27 @@
+<script lang="ts">
+
+export default {
+  
+   beforeRouteEnter (to, from, next) {
+     let store = useCounterStores()
+      
+    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+     
+     next()
+   }else{
+     
+   }
+console.log(store.logindata.Meta.status)
+   }
+
+}
+
+</script>
+
+
+
+
+
 <script lang="ts" setup>
     import  useRouter    from "vue-router";
     import  useRoute    from "vue-router";
