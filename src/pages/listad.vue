@@ -4,8 +4,8 @@ export default {
   
    beforeRouteEnter (to, from, next) {
      let store = useCounterStores()
-      
-    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+      let covert:any = localStorage.getItem('login')
+    if(JSON.parse(covert).Meta.status == 200){
      
      next()
    }else{

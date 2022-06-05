@@ -35,6 +35,36 @@ let adIdInsidepublic = ref(store.adIdPublic)
 
     }
     getad()
+   
+    function sendOrder(){
+            let sendOrderData = {
+                 UserID: store.logindata.Data.User_Id,
+                 ADID: adIdInsidepublic.value,
+                 Answare:"{[],[],[],[],[],[],[],[],[],[]}",
+                 Date:"2020/12/12 12:12",
+                 Price:"20000"
+           }
+           axios.post('https://emserver.iran.liara.run/App/Shop/Cart', sendOrderData)
+          
+            .then(function (response) {
+                // handle success
+                // posts.value = response.data;
+                
+           
+                 response.data;
+                console.log("sendOrderData" , response.data)
+              
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+
+    }
+
 
       
  let imageSingle = ref('')
@@ -65,6 +95,7 @@ v-for="(item, i) in singleAdpublic" :key="i"
   class="my-4"
   elevation="2"
   color="primary"
+  @click="sendOrder()"
 > پرداخت</v-btn>
 </div>
 </div>

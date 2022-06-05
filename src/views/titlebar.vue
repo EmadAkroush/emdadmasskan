@@ -7,14 +7,30 @@ import signinpopupsms from '../views/signinpopupsms.vue';
 import {  useCounterStores } from "../stores";
 import signout from '../views/signout.vue' 
 import { storeToRefs } from 'pinia';
+
+let userMenu = [
+        {
+          action: 'mdi-google-my-business',
+          items: [ { title: 'List Item'},{ title: 'List Item' }  ],
+          
+        },
+       
+ ]
+ 
+
+ 
 let store = useCounterStores();
   var drawer=ref(false);
   let listUser = ref()
- 
-   
-  store.listUserShow = JSON.parse(localStorage.getItem('listUserShow'));
-  store.listAdShow = JSON.parse(localStorage.getItem('listAdShow'));
-  store.creatAdShow = JSON.parse(localStorage.getItem('creatAdShow'));
+
+   let convert1:any = localStorage.getItem('listUserShow')
+   let convert2:any =  localStorage.getItem('listAdShow')
+   let convert3:any =  localStorage.getItem('creatAdShow')
+   let convert4:any =  localStorage.getItem('emdadmaskanManShow')
+  store.listUserShow = JSON.parse(convert1);
+  store.listAdShow = JSON.parse(convert2);
+  store.creatAdShow = JSON.parse(convert3);
+  store.emdadmaskanManShow = JSON.parse(convert4);
   listUser.value = store.listUserShow
 
       console.log("store.logindata", store.logindata)
@@ -45,6 +61,31 @@ let store = useCounterStores();
         <v-divider inset></v-divider>
 
 
+              <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-registered-trademark
+          </v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+
+        <router-link class="link" to="/register"> 
+          <v-list-item-title  >  تکمیل ثبت نام </v-list-item-title>
+        </router-link>  
+          
+        </v-list-item-content>
+
+      </v-list-item>
+
+        <v-divider inset></v-divider>
+
+     
+
+
+
+
+
         <v-list-item>
         <v-list-item-icon>
           <v-icon color="indigo">
@@ -61,11 +102,68 @@ let store = useCounterStores();
       </v-list-item>
 
         <v-divider inset></v-divider>
+
+       <v-list-group
+        v-for="item in userMenu"
+        v-show="store.emdadmaskanManShow"
+        
+        
+        no-action
+      >
+        <template v-slot:activator>
+           <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-google-my-business
+          </v-icon>
+        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title > مسکنت من </v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-information-variant
+          </v-icon>
+        </v-list-item-icon>
+          <v-list-item-content>
+              <router-link class="link" to="/userinfo"> 
+            <v-list-item-title   >اطلاعات کاربری</v-list-item-title>
+              </router-link>
+          </v-list-item-content>
+        </v-list-item>
+          <v-list-item >
+        <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-order-bool-ascending-variant
+          </v-icon>
+        </v-list-item-icon>
+          <v-list-item-content>
+            <router-link class="link" to="/userorder"> 
+            <v-list-item-title   > سفارشات من </v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+         <v-list-item >
+        <v-list-item-icon>
+          <v-icon color="indigo">
+            mdi-heart-outline
+          </v-icon>
+        </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title   > نشان شده ها </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+
+
+        <v-divider inset></v-divider>
         
          <v-list-item>
-        <v-list-item-icon>
+        <v-list-item-icon >
          
-            <font-awesome-icon icon="fa-solid fa-blog" />
+            <v-icon color="indigo"> mdi-post </v-icon>
          
         </v-list-item-icon>
 
@@ -82,8 +180,8 @@ let store = useCounterStores();
       <v-divider inset></v-divider>
 
       <v-list-item>
-        <v-list-item-icon>
-           <font-awesome-icon icon="fa-solid fa-address-card" />
+        <v-list-item-icon >
+          <v-icon color="indigo">mdi-card-account-mail-outline</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -96,14 +194,14 @@ let store = useCounterStores();
       <v-divider inset></v-divider>
 
       <v-list-item>
-        <v-list-item-icon>
+        <v-list-item-icon color="indigo"> 
     
-            <font-awesome-icon icon="fa-solid fa-circle-info" />
+            <v-icon  color="indigo" >mdi-information-outline</v-icon>
        
 
         </v-list-item-icon>
 
-        <v-list-item-content>
+        <v-list-item-content >
           <v-list-item-title>  درباره ما  </v-list-item-title>
           
         </v-list-item-content>
@@ -112,9 +210,9 @@ let store = useCounterStores();
        
       <v-divider inset></v-divider>
          <v-list-item v-show="store.listUserShow">
-        <v-list-item-icon>
+        <v-list-item-icon >
     
-            <v-icon>mdi-folder-plus</v-icon>
+            <v-icon color="indigo">mdi-folder-plus</v-icon>
        
 
         </v-list-item-icon>
@@ -134,9 +232,9 @@ let store = useCounterStores();
 
       <v-divider inset></v-divider>
             <v-list-item v-show="store.listUserShow">
-        <v-list-item-icon>
+        <v-list-item-icon >
     
-            <v-icon>mdi-account-multiple</v-icon>
+            <v-icon color="indigo">mdi-account-multiple</v-icon>
        
 
         </v-list-item-icon>
@@ -159,9 +257,9 @@ let store = useCounterStores();
 <v-divider inset></v-divider>
          
             <v-list-item v-show="store.listAdShow">
-        <v-list-item-icon>
+        <v-list-item-icon >
     
-            <v-icon>mdi-advertisements</v-icon>
+            <v-icon color="indigo">mdi-advertisements</v-icon>
        
 
         </v-list-item-icon>

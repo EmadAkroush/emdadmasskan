@@ -3,6 +3,27 @@
 import titlebar from './views/titlebar.vue'
 import ourtor from './views/ourtor.vue'
 import  useRouter   from 'vue-router';
+import {ref , reactive , onBeforeMount , onBeforeUpdate , onUpdated} from '@vue/composition-api';
+  import {  useCounterStores } from "./stores";
+let store = useCounterStores();
+
+ onBeforeMount(()=>{
+       localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
+       let covert1:any =localStorage.getItem('login')
+        if(JSON.parse(covert1).Meta.status == 200){
+          let covert2:any =localStorage.getItem('loginShow')
+        store.loginShow = JSON.parse(covert2)
+        store.logoutShow = true
+          let covert3:any = localStorage.getItem('login')
+              store.logindata = JSON.parse(covert3)
+         
+        }else{
+        
+           }
+
+     })
+
+
 
 </script>
 

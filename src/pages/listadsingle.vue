@@ -139,6 +139,7 @@ let my =ref();
           <v-row>
          
           <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark @click="updateAd()" width="150px"> بروزرسانی </v-btn>
+          
         </v-row>
         
     </v-form>

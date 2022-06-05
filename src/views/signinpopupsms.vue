@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-  import {ref , reactive , onBeforeMount , onBeforeUpdate} from '@vue/composition-api';
+  import {ref , reactive , onBeforeMount , onBeforeUpdate , onUpdated} from '@vue/composition-api';
   import axios from 'axios';
   import { json } from 'stream/consumers';
   import {  useCounterStores } from "../stores";
@@ -33,20 +33,22 @@ var nameRules = reactive([
     
    }
      ).then(function (response) {
-     
+      
       store.listUserShow = true
       store.listAdShow = true
       store.creatAdShow = true
+      store.emdadmaskanManShow = true
       localStorage.setItem('listUserShow' , JSON.stringify(store.listUserShow))
       localStorage.setItem('listAdShow' , JSON.stringify(store.listAdShow))
       localStorage.setItem('creatAdShow' , JSON.stringify(store.creatAdShow))
+      localStorage.setItem('emdadmaskanManShow' , JSON.stringify(store.emdadmaskanManShow))
       localStorage.setItem('login', JSON.stringify(response.data))
       
-      store.logindata = response.data
+      store.logindata = localStorage.getItem('login')
       store.loginShow = false
       location.reload();  
-    
-  
+      console.log("store.logindata", store.logindata);
+      
       
 
   })
@@ -62,18 +64,50 @@ var nameRules = reactive([
 }
 
 
- onBeforeMount(()=>{
-       localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
-        if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+//  onBeforeMount(()=>{
+//        localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
+//         if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
           
-        store.loginShow = JSON.parse(localStorage.getItem('loginShow'))
-        store.logoutShow = true
+//         store.loginShow = JSON.parse(localStorage.getItem('loginShow'))
+//         store.logoutShow = true
+//               store.logindata = JSON.parse(localStorage.getItem('login'))
+         
+//         }else{
         
-        }else{
-        
-           }
+//            }
 
-     })
+//      })
+
+// onBeforeUpdate(()=>{
+
+//         localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
+//         if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+          
+//         store.loginShow = JSON.parse(localStorage.getItem('loginShow'))
+//         store.logoutShow = true
+//               store.logindata = JSON.parse(localStorage.getItem('login'))
+
+        
+//         }else{
+        
+//            }
+  
+// })     
+// onUpdated(()=>{
+
+//         localStorage.setItem('loginShow', JSON.stringify(!store.loginShow))
+//         if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+          
+//         store.loginShow = JSON.parse(localStorage.getItem('loginShow'))
+//         store.logoutShow = true
+//               store.logindata = JSON.parse(localStorage.getItem('login'))
+
+        
+//         }else{
+        
+//            }
+  
+// })  
 
 </script>
 <template>

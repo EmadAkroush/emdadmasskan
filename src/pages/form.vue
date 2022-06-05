@@ -5,8 +5,8 @@ export default {
   
    beforeRouteEnter (to, from, next) {
      let store = useCounterStores()
-      
-    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+      let covert:any = localStorage.getItem('login')
+    if(JSON.parse(covert).Meta.status == 200){
      
      next()
    }else{
@@ -15,6 +15,7 @@ export default {
 console.log(store.logindata.Meta.status)
    }
 }
+
 
 </script>
 
@@ -36,9 +37,32 @@ let store = useCounterStores();
     title: '',
     select: '',
     pichers: '',
-    text: ''
+    text: '',
   })
    var items = ['نظافت و شست و شو ', 'اسباب کشی بسته بندی', 'نصب و تعمیر لوازم منزل ', 'تعمیر و سرویس تجهیزات گرمایشی و سرمایشی ', ' نگهداری ساختمان', 'زیبایی', 'خودرو ']
+   let adIdform = ref()
+
+   let counter = ref(0)
+function myqustion() {
+ counter.value++
+ 
+}
+ let counterA = ref(0)
+function  myanswer(){
+ counterA.value++
+}
+ var  question = reactive({
+    question: [counter.value],
+    answer: '',
+    price: ''
+  })
+ 
+
+
+
+
+
+
 function createpost() {
   let a:any = form.pichers
   console.log("a", a);
@@ -64,6 +88,7 @@ function createpost() {
     axios.post('https://emserver.iran.liara.run/App/Ad', agahi
   )
     .then(function (response) {
+      adIdform.value = response.data.Data.Data_Save._id
       console.log("agahi", agahi);
       console.log("response.data", response.data)
     })
@@ -75,16 +100,41 @@ function createpost() {
       // always executed
     });
 
+    
+
   }
 
   reader.readAsDataURL(a[0]);
   
- 
+  let Question = {
+    UserID: store.logindata.Data.User_Id,
+    ADID: adIdform.value,
+    QuestionAd: question.question
+
+  }
+    axios.post('https://emserver.iran.liara.run/App/Ad/QuestionAD', Question
+  )
+    .then(function (response) {
+      
+      console.log("Question", Question);
+      console.log("response.data Question", response.data)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+
+   
 
 
-  
+
 }
- 
+
+
+
 </script>
 <template>
 
@@ -120,14 +170,32 @@ function createpost() {
           
           </v-col>
         </v-row>
-
-
-        <v-row>
-         
-          <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark @click="createpost()" width="150px">ارسال </v-btn>
+       <v-row>
+          <v-btn class="my-4 mr-12 deep-purple accent-4"  dense dark width="200px" @click="myqustion()">افزودن سوال</v-btn> 
+          <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark width="200px" @click="myanswer()">افزودن جواب</v-btn>
+       </v-row>
+          <v-row v-for="(item, i) in counter" :key="i" >
+          <v-col >
+          
+           <v-text-field label=" سوال مورد نظر خود را وارد فرمایید " v-model="question.question[i]" prepend-icon="mdi-chat-question">
+          </v-text-field>
+        
+          </v-col>
         </v-row>
-
+           <v-row  >
+          <v-col v-for="(item, i) in counterA" :key="i" class="col-6" >
+          
+           <v-text-field label=" جواب را وارد فرمایید " v-model="question.answer" prepend-icon="mdi-message-reply-text">
+          </v-text-field>
+           <v-text-field label=" قیمت را وارد فرمایید " v-model="question.price" prepend-icon="mdi-message-reply-text">
+          </v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-btn class="my-4 mr-12 deep-purple accent-4"  dense dark @click="createpost()" width="200px">ارسال </v-btn>
+        </v-row>
      
+      
       </v-form>
     </v-sheet>
   </div>

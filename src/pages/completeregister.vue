@@ -8,20 +8,27 @@ const post = ref({})
 let store = useCounterStores();
 
   var form = reactive({
-    title: '',
-    select: '',
-    pichers: '',
-    text: ''
+    Name: '',
+    Nation: '',
+    Telephone: '',
+    Location: '',
+    Gender: ''
   })
-
-  function submitregister(){
-    
-  }
-  function createpost(){
-     axios.post('https://jsonplaceholder.typicode.com/posts', form
+ 
+  
+  function userUpdate(){
+    let send = {
+     User_Id : store.logindata.Data.User_Id,
+     User_Name: form.Name,
+     User_Nation : form.Nation,
+     User_Telephone : form.Telephone,
+     User_Location: form.Location,
+     User_Gender: form.Gender
+    }
+     axios.put('https://emserver.iran.liara.run/App/User', send
      ).then(function (response) {
        
-      console.log(response.data)
+      console.log("User-update"+response.data)
   })
   .catch(function (error) {
     // handle error
@@ -40,33 +47,64 @@ let store = useCounterStores();
       <v-form class="pa-4 px-md-14">
         <v-row>
           <v-col md="6" sm="12" cols="12">
-               <v-text-field label=" نام  " v-model="form.title" prepend-icon="mdi-account">
+
+               <v-text-field label=" نام و  نام خانوادگی " v-model="form.Name" prepend-icon="mdi-account">
+
           </v-text-field>
                
           </v-col>
           
           <v-col md="6" sm="12" cols="12">
-               <v-text-field label=" نام خانوادگی  " v-model="form.title" prepend-icon="mdi-account-multiple">
+               <v-text-field label="کدملی " v-model="form.Nation" prepend-icon="mdi-cellphone">
+     
           </v-text-field>
           
            
           </v-col>
         </v-row>
         <v-col md="12" xs="12" sm="12" cols="12">
-          <v-text-field label=" عنوان آگهی را وارد فرمایید " v-model="form.title" prepend-icon="mdi-format-title">
-          </v-text-field>
+        
+          <v-radio-group
+      v-model="form.Gender"
+      row
+    >
+        <v-icon> mdi-gender-male-female </v-icon>
+    جنسیت
+      <v-radio
+        label="مرد"
+        value="مرد"
+      ></v-radio>
+      <v-radio
+        label="زن"
+        value="زن"
+      ></v-radio>
+    </v-radio-group>
         </v-col>
         <v-row>
           <v-col>
-          <v-textarea counter label="متن آگهی را وارد فرمایید "  v-model="form.text" :rules="rules" :value="value" prepend-icon="mdi-calendar-text"></v-textarea>
-          
+
+          <v-text-field label=" شماره تلفن " v-model="form.Telephone" prepend-icon="mdi-cellphone">
+              </v-text-field>
+              
           </v-col>
+          <v-col>
+            
+          </v-col>
+        </v-row>
+          <v-row>
+          <v-col>
+
+          <v-text-field label=" آدرس  " v-model="form.Location" prepend-icon="mdi-map-marker">
+              </v-text-field>
+              
+          </v-col>
+         
         </v-row>
 
 
         <v-row>
          
-          <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark @click="submit" width="150px">ارسال </v-btn>
+          <v-btn class="my-4 mr-12 deep-purple accent-4" dense dark @click="userUpdate" width="150px">ارسال </v-btn>
         </v-row>
 
      

@@ -9,10 +9,13 @@
   localStorage.removeItem('listUserShow')
   localStorage.removeItem('listAdShow')
   localStorage.removeItem('creatAdShow')
+  localStorage.removeItem('emdadmaskanManShow')
   store.creatAdShow = false
   store.listUserShow = false
   store.listAdShow = false
+  store.emdadmaskanManShow = false
   store.logoutShow = true
+
   location.reload();
   router.push('/')
 }
@@ -22,7 +25,7 @@
 
 <div>
    <template >
-        <v-btn color="primary"  @click="logout()" dark dense v-bind="attrs" v-on="on" active v-show="store.logoutShow">
+        <v-btn color="primary"  @click="logout()" dark dense   active v-show="store.logoutShow">
          خروج از حساب کاربری
           <v-icon>mdi-logout-variant</v-icon>
         </v-btn>

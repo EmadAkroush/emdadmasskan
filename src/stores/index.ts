@@ -22,6 +22,7 @@ export const useCounterStores:any = defineStore({
     creatAdShow: false,
     loginShow: true,
     logoutShow: false,
+    emdadmaskanManShow: false
 
   }),
   getters: {

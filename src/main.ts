@@ -79,7 +79,5 @@ const app = createApp({
 app.use(PiniaVuePlugin)
 app.use(createPinia)
 app.mount('#app')
-function createWebHistory() {
-  throw new Error('Function not implemented.')
-}
+
 

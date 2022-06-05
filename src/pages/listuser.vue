@@ -5,8 +5,8 @@ export default {
   
    beforeRouteEnter (to, from, next) {
      let store = useCounterStores()
-      
-    if(JSON.parse(localStorage.getItem('login')).Meta.status == 200){
+     let convert:any = localStorage.getItem('login')
+    if(JSON.parse(convert).Meta.status == 200){
      
      next()
    }else{
